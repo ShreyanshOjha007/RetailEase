@@ -1,0 +1,30 @@
+.item-container{
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+    height: calc(100vh - 5rem);
+    box-sizing: border-box;
+    background-color: #2C3335;
+}
+
+.left-column{
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 0.6;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    padding: 16px;
+    height: 100%;
+    box-sizing: border-box;
+    flex-direction: column;
+}
+
+.right-column{
+    flex: 0.4;
+    padding: 16px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: 1px solid #cccccc;
+    height: 100%;
+    flex-direction: column;
+}
