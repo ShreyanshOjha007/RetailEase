@@ -36,7 +36,11 @@ export default function CartSummary({customerName, setCustomerName, mobileNumber
                     UPI
                 </button>
             </div>
-            <ReceiptPopup />
+            <div className="d-flex gap-3 mt-3">
+                <button className="btn btn-warning flex-grow-1">
+                    Place Order
+                </button>
+            </div>
         </div>
     )
 }

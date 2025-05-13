@@ -37,7 +37,7 @@ public class SecurityConfig {
         http.cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/login","/encode").permitAll()
-                        .requestMatchers("/categories/**","/item/**").hasAnyRole("USER","ADMIN")
+                        .requestMatchers("/categories/**","/item/**","/orders/**","/payments/**").hasAnyRole("USER","ADMIN")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -58,7 +58,7 @@ public class SecurityConfig {
 
     private UrlBasedCorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(List.of("http://localhost:5174"));
+        corsConfiguration.setAllowedOrigins(List.of("http://localhost:5173"));
         corsConfiguration.setAllowedMethods(List.of("GET","POST","PATCH","DELETE","PUT","OPTIONS"));
         corsConfiguration.setAllowedHeaders(List.of("Authorization","Content-type"));
         corsConfiguration.setAllowCredentials(true);
