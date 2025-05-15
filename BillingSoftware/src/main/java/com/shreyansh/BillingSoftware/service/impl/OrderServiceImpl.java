@@ -2,18 +2,19 @@ package com.shreyansh.BillingSoftware.service.impl;
 
 import com.shreyansh.BillingSoftware.entity.OrderEntity;
 import com.shreyansh.BillingSoftware.entity.OrderItemEntity;
-import com.shreyansh.BillingSoftware.io.OrderRequest;
-import com.shreyansh.BillingSoftware.io.OrderResponse;
-import com.shreyansh.BillingSoftware.io.PaymentDetails;
-import com.shreyansh.BillingSoftware.io.PaymentMethod;
+import com.shreyansh.BillingSoftware.io.PaymentStatus;
+import com.shreyansh.BillingSoftware.io.*;
 import com.shreyansh.BillingSoftware.repository.OrderEntityRepo;
 import com.shreyansh.BillingSoftware.repository.OrderItemEntityRepo;
 import com.shreyansh.BillingSoftware.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,8 +32,8 @@ public class OrderServiceImpl implements OrderService {
         PaymentDetails paymentDetails = new PaymentDetails();
         paymentDetails.setPaymentStatus(
                 newOrder.getPaymentMethod() == PaymentMethod.CASH ?
-                        PaymentDetails.PaymentStatus.COMPLETED
-                        : PaymentDetails.PaymentStatus.PENDING);
+                        PaymentStatus.COMPLETED
+                        : PaymentStatus.PENDING);
         newOrder.setPaymentDetails(paymentDetails);
         List<OrderItemEntity> orderItemEntityList = orderRequest.getCartItems().stream()
                 .map(this::convertToOrderItemEntity)
@@ -61,6 +62,48 @@ public class OrderServiceImpl implements OrderService {
                 .stream().map(this::convertToOrderResponse)
                 .collect(Collectors.toList());
         return latestOrders;
+    }
+
+    @Override
+    public OrderResponse verifyPayment(PaymentVerificationRequest request) {
+        OrderEntity existingOrder = orderEntityRepo.findByOrderId(request.getOrderId())
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+        if(!verifyRazorpaySignature(request.getRazorpaySignature(),
+                request.getRazorpayOrderId(),request.getRazorpayPaymentId())){
+            throw new RuntimeException("Payment verification failed");
+        }
+        PaymentDetails paymentDetails = existingOrder.getPaymentDetails();
+        paymentDetails.setRazorpaySignature(request.getRazorpaySignature());
+        paymentDetails.setRazorpayPaymentId(request.getRazorpayPaymentId());
+        paymentDetails.setRazorpayOrderId(request.getRazorpayOrderId());
+        paymentDetails.setPaymentStatus(PaymentStatus.COMPLETED);
+        System.out.println("before saving existing order" + existingOrder);
+        existingOrder.setPaymentDetails(paymentDetails);
+        existingOrder = orderEntityRepo.save(existingOrder);
+        System.out.println("after saving existing order" + existingOrder);
+        return convertToOrderResponse(existingOrder);
+
+    }
+
+    @Override
+    public Double sumSalesByDate(LocalDate date) {
+        return orderEntityRepo.sumSalesByDate(date);
+    }
+
+    @Override
+    public Long countByOrderDate(LocalDate date) {
+        return orderEntityRepo.countByOrderDate(date);
+    }
+
+    @Override
+    public List<OrderResponse> findRecentOrders() {
+        return orderEntityRepo.findRecentOrders(PageRequest.of(0,5))
+                .stream().map(this::convertToOrderResponse)
+                .collect(Collectors.toList());
+    }
+
+    private boolean verifyRazorpaySignature(String razorpaySignature, String razorpayOrderId, String razorpayPaymentId) {
+        return true;
     }
 
     private OrderItemEntity convertToOrderItemEntity(OrderRequest.OrderItemRequest orderItemRequest) {

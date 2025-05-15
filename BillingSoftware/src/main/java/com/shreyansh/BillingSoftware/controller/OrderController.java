@@ -3,6 +3,7 @@ package com.shreyansh.BillingSoftware.controller;
 
 import com.shreyansh.BillingSoftware.io.OrderRequest;
 import com.shreyansh.BillingSoftware.io.OrderResponse;
+import com.shreyansh.BillingSoftware.io.PaymentVerificationRequest;
 import com.shreyansh.BillingSoftware.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -32,6 +33,11 @@ public class OrderController {
     @GetMapping("/recent")
     public List<OrderResponse> latestOrders(){
         return orderService.getLatestOrders();
+    }
+
+    @PostMapping("/verifyPayment")
+    public OrderResponse verifyPayment(@RequestBody PaymentVerificationRequest paymentVerificationRequest){
+        return orderService.verifyPayment(paymentVerificationRequest);
     }
 
 }

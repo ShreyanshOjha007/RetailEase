@@ -1,6 +1,8 @@
 package com.shreyansh.BillingSoftware.io;
 
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,11 +21,11 @@ public class PaymentDetails {
 
     private String razorpayPaymentId;
 
+    @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
 
-    public enum PaymentStatus{
-        COMPLETED,PENDING,FAILED
-    }
-
+//    public enum PaymentStatus{
+//        COMPLETED,PENDING,FAILED
+//    }
 
 }
