@@ -1,5 +1,5 @@
-import "./menBar.css"
-import {assets} from "../../assets/assets.js";
+import "./MenBar.css"
+import {assets} from "../../Assets/assets.js";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext.jsx";

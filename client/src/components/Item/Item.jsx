@@ -1,4 +1,4 @@
-import "./item.css"
+import "./Item.css"
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext.jsx";
 

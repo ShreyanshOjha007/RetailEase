@@ -4,7 +4,7 @@ import ReceiptPopup from "../ReceiptPopup/ReceiptPopup.jsx";
 import toast from "react-hot-toast";
 import {createOrder, deleteOrder} from "../../Service/OrderService.js";
 import {createRazorpayOrder, verifyRazorpayPayment} from "../../Service/PaymentService.js";
-import {AppConstants} from "../../Util/constants.js";
+import {AppConstants} from "../../Util/Constants.js";
 
 export default function CartSummary({customerName, setCustomerName, mobileNumber, setMobileNumber}) {
 

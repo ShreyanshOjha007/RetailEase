@@ -1,4 +1,4 @@
-import MenuBar from "./components/menuBar/menuBar.jsx";
+import MenuBar from "./components/MenuBar/MenuBar.jsx";
 import {Navigate, Route, Routes, useLocation} from "react-router-dom";
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 import Explore from "./pages/Explore/Explore.jsx";
@@ -6,7 +6,7 @@ import ManageItem from "./pages/ManageItem/ManageItem.jsx";
 import ManageCategory from "./pages/ManageCategory/ManageCategory.jsx";
 import ManageUser from "./pages/ManageUser/ManageUser.jsx";
 import {Toaster} from "react-hot-toast";
-import Login from "./pages/Login/login.jsx";
+import Login from "./pages/Login/Login.jsx";
 import OrderHistory from "./pages/OrderHistory/OrderHistory.jsx";
 import {useContext} from "react";
 import {AppContext} from "./context/AppContext.jsx";
