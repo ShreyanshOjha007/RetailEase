@@ -1,4 +1,4 @@
-import './Login.css';
+import './login.css';
 import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { login } from "../../service/AuthService.js";
