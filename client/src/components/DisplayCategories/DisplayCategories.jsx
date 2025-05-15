@@ -13,9 +13,10 @@ export default function DisplayCategories({categories,selectedCategories,setSele
                         numberOfItems={category.items}
                         isSelected={selectedCategories === category.categoryId}
                         onClick={() => {
-                            if (selectedCategories === category.categoryId) {
+                            if(selectedCategories === category.categoryId) {
                                 setSelectedCategories(null);
-                            } else {
+                            }
+                            else {
                                 setSelectedCategories(category.categoryId);
                             }
                         }}

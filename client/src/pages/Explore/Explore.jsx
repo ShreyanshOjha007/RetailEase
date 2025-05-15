@@ -9,7 +9,7 @@ import DisplayCategories from "../../components/DisplayCategories/DisplayCategor
 
 const Explore = () => {
     const {categories} = useContext(AppContext);
-    const [selectedCategorise, setSelectedCategories] = useState("");
+    const [selectedCategories, setSelectedCategories] = useState("");
     const [customerName, setCustomerName] = useState("");
     const [mobileNumber, setMobileNumber] = useState("");
     return (
@@ -17,13 +17,13 @@ const Explore = () => {
             <div className="left-column">
                 <div className="first-row" style={{overflowY: 'auto'}}>
                     <DisplayCategories
-                        selectedCategories={setSelectedCategories}
+                        selectedCategories={selectedCategories}
                         setSelectedCategories={setSelectedCategories}
                         categories={categories} />
                 </div>
                 <hr className="horizontal-line" />
                 <div className="second-row" style={{overflowY: 'auto'}}>
-                    <DisplayItems selectedCategories={selectedCategorise} />
+                    <DisplayItems selectedCategories={selectedCategories} />
                 </div>
             </div>
             <div className="right-column d-flex flex-column">
