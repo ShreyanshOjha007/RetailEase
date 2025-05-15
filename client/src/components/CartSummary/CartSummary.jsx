@@ -2,8 +2,8 @@ import {useContext, useState} from "react";
 import {AppContext} from "../../context/AppContext.jsx";
 import ReceiptPopup from "../ReceiptPopup/ReceiptPopup.jsx";
 import toast from "react-hot-toast";
-import {createOrder, deleteOrder} from "../../service/OrderService.js";
-import {createRazorpayOrder, verifyRazorpayPayment} from "../../service/PaymentService.js";
+import {createOrder, deleteOrder} from "../../Service/OrderService.js";
+import {createRazorpayOrder, verifyRazorpayPayment} from "../../Service/PaymentService.js";
 import {AppConstants} from "../../Util/constants.js";
 
 export default function CartSummary({customerName, setCustomerName, mobileNumber, setMobileNumber}) {

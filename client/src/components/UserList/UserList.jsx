@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {deleteUser} from "../../service/UserService.js";
+import {deleteUser} from "../../Service/UserService.js";
 import toast from "react-hot-toast";
 
 const UserList = ({users,setUsers}) => {

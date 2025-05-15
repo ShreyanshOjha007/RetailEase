@@ -1,6 +1,6 @@
 import './OrderHistory.css'
 import {useEffect, useState} from "react";
-import {fetchRecentOrders} from "../../service/OrderService.js";
+import {fetchRecentOrders} from "../../Service/OrderService.js";
 import toast from "react-hot-toast";
 
 export default function OrderHistory() {
